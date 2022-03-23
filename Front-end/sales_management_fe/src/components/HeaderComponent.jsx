@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'bootstrap';
+import bootstrap from 'bootstrap';
 
 
 class HeaderComponent extends Component {
@@ -17,7 +17,7 @@ class HeaderComponent extends Component {
             <div>
                 <header className='header'>
                     <div className='header-1'>
-                    {/* <form class="navbar-form navbar-left" action="Admin_trangchuController">
+                    {/* <form class="navbar-form navbar-left" action="">
                     <div class="input-group">
                     <input type="text" name="key"  class="form-control" placeholder="Nhập từ khóa"></input>
                         <div class="input-group-btn">

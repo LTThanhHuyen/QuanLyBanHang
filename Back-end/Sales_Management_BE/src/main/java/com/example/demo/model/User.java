@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,7 @@ public class User {
 	private String password;
 	
 	@Column(name="is_blocked", nullable = false)
-	private Boolean is_blocked;
+	private Boolean isblocked;
 	
 	@Column(name="name",  length=100, columnDefinition = "nvarchar(100) not null")
 	private String name;
@@ -44,16 +46,16 @@ public class User {
 	private String email;
 	
 	@Column( name="created_at", nullable = false, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp created_at;
+	private Timestamp createdat;
 	
 	@Column(name="updated_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp updated_at;
+	private Timestamp updatedat;
 	
 	@Column(name="deleted_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp deleted_at;
+	private Timestamp deletedat;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Collection<Order> orders;
+	private List<Order> orders;
 	
 //
 //	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -67,34 +69,29 @@ public class User {
 ////	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
 //	private Collection<Role> roles;
 	
-	@ManyToOne
-	@JoinColumn(name="role_id")
+	@ManyToOne(targetEntity = Role.class)
+	@JoinColumn(name="role_id", referencedColumnName = "id")
 	private Role role;
-	
-	
 
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public User(String username, String password, Boolean is_blocked, String name, String address, String phone,
-		String email, Timestamp created_at, Timestamp updated_at, Timestamp deleted_at, Collection<Order> orders,
-		Role role) {
-	super();
-	this.username = username;
-	this.password = password;
-	this.is_blocked = is_blocked;
-	this.name = name;
-	this.address = address;
-	this.phone = phone;
-	this.email = email;
-	this.created_at = created_at;
-	this.updated_at = updated_at;
-	this.deleted_at = deleted_at;
-	this.orders = orders;
-	this.role = role;
-}
+	public User(String username, String password, Boolean isblocked, String name, String address, String phone,
+			String email, Timestamp createdat, Timestamp updatedat, Timestamp deletedat, Role role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.isblocked = isblocked;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+		this.deletedat = deletedat;
+		this.role = role;
+	}
 
 	public Long getId() {
 		return id;
@@ -120,12 +117,12 @@ public class User {
 		this.password = password;
 	}
 
-	public Boolean getIs_blocked() {
-		return is_blocked;
+	public Boolean getIsblocked() {
+		return isblocked;
 	}
 
-	public void setIs_blocked(Boolean is_blocked) {
-		this.is_blocked = is_blocked;
+	public void setIsblocked(Boolean isblocked) {
+		this.isblocked = isblocked;
 	}
 
 	public String getName() {
@@ -160,35 +157,35 @@ public class User {
 		this.email = email;
 	}
 
-	public Timestamp getCreated_at() {
-		return created_at;
+	public Timestamp getCreatedat() {
+		return createdat;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setCreatedat(Timestamp createdat) {
+		this.createdat = createdat;
 	}
 
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public Timestamp getUpdatedat() {
+		return updatedat;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedat(Timestamp updatedat) {
+		this.updatedat = updatedat;
 	}
 
-	public Timestamp getDeleted_at() {
-		return deleted_at;
+	public Timestamp getDeletedat() {
+		return deletedat;
 	}
 
-	public void setDeleted_at(Timestamp deleted_at) {
-		this.deleted_at = deleted_at;
+	public void setDeletedat(Timestamp deletedat) {
+		this.deletedat = deletedat;
 	}
 
-	public Collection<Order> getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(Collection<Order> orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 
@@ -199,9 +196,6 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
-	
-	
+
 	
 }

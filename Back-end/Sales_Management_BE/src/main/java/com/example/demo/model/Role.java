@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,42 +23,34 @@ public class Role {
 	private String name;
 	
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-	private Collection<User> users;
+	private List<User> users;
 
 	public Role() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(String name, Collection<User> users) {
+	public Role(String name) {
 		super();
 		this.name = name;
-		this.users = users;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Collection<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Collection<User> users) {
-		this.users = users;
-	}
 	
 	
 }

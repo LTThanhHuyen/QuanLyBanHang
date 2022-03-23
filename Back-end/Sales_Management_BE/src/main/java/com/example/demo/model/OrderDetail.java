@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_details")
-public class Order_Detail {
+public class OrderDetail {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,48 +29,48 @@ public class Order_Detail {
 	private Long price;
 	
 	@Column(name="is_bought", nullable = false)
-	private boolean is_bought;
+	private boolean isbought;
 	
 	@Column( name="created_user", nullable = false)
-	private Long created_user;
+	private Long createduser;
 	
 	@Column(name="updated_user", nullable = true)
-	private Long updated_user;
+	private Long updateduser;
 	
 	@Column( name="created_at", nullable = false, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp created_at;
 	
 	@Column(name="updated_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp updated_at;
+	private Timestamp updatedat;
 	
 	@Column(name="deleted_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp deleted_at;
+	private Timestamp deletedat;
 	
-	@ManyToOne
-	@JoinColumn(name="product_id")
+	@ManyToOne(targetEntity = Product.class)
+	@JoinColumn(name="product_id", referencedColumnName = "id")
 	private Product product;
 	
-	@ManyToOne
-	@JoinColumn(name="order_id")
+	@ManyToOne(targetEntity = Order.class)
+	@JoinColumn(name="order_id", referencedColumnName = "id")
 	private Order order;
 
-	public Order_Detail() {
+	public OrderDetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order_Detail(Long quantity, Long size, Long price, boolean is_bought, Long created_user, Long updated_user,
-			Timestamp created_at, Timestamp updated_at, Timestamp deleted_at, Product product, Order order) {
+	public OrderDetail(Long quantity, Long size, Long price, boolean isbought, Long createduser, Long updateduser,
+			Timestamp created_at, Timestamp updatedat, Timestamp deletedat, Product product, Order order) {
 		super();
 		this.quantity = quantity;
 		this.size = size;
 		this.price = price;
-		this.is_bought = is_bought;
-		this.created_user = created_user;
-		this.updated_user = updated_user;
+		this.isbought = isbought;
+		this.createduser = createduser;
+		this.updateduser = updateduser;
 		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.deleted_at = deleted_at;
+		this.updatedat = updatedat;
+		this.deletedat = deletedat;
 		this.product = product;
 		this.order = order;
 	}
@@ -106,28 +107,28 @@ public class Order_Detail {
 		this.price = price;
 	}
 
-	public boolean isIs_bought() {
-		return is_bought;
+	public boolean isIsbought() {
+		return isbought;
 	}
 
-	public void setIs_bought(boolean is_bought) {
-		this.is_bought = is_bought;
+	public void setIsbought(boolean isbought) {
+		this.isbought = isbought;
 	}
 
-	public Long getCreated_user() {
-		return created_user;
+	public Long getCreateduser() {
+		return createduser;
 	}
 
-	public void setCreated_user(Long created_user) {
-		this.created_user = created_user;
+	public void setCreateduser(Long createduser) {
+		this.createduser = createduser;
 	}
 
-	public Long getUpdated_user() {
-		return updated_user;
+	public Long getUpdateduser() {
+		return updateduser;
 	}
 
-	public void setUpdated_user(Long updated_user) {
-		this.updated_user = updated_user;
+	public void setUpdateduser(Long updateduser) {
+		this.updateduser = updateduser;
 	}
 
 	public Timestamp getCreated_at() {
@@ -138,20 +139,20 @@ public class Order_Detail {
 		this.created_at = created_at;
 	}
 
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public Timestamp getUpdatedat() {
+		return updatedat;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedat(Timestamp updatedat) {
+		this.updatedat = updatedat;
 	}
 
-	public Timestamp getDeleted_at() {
-		return deleted_at;
+	public Timestamp getDeletedat() {
+		return deletedat;
 	}
 
-	public void setDeleted_at(Timestamp deleted_at) {
-		this.deleted_at = deleted_at;
+	public void setDeletedat(Timestamp deletedat) {
+		this.deletedat = deletedat;
 	}
 
 	public Product getProduct() {
@@ -171,6 +172,4 @@ public class Order_Detail {
 	}
 	
 	
-
-
 }

@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,48 +39,46 @@ public class Product {
 	private String status;
 	
 	@Column( name="created_user", nullable = false)
-	private Long created_user;
+	private Long createduser;
 	
 	@Column(name="updated_user", nullable = true)
-	private Long updated_user;
+	private Long updateduser;
 
 	@Column( name="created_at", nullable = false, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp created_at;
+	private Timestamp createdat;
 	
 	@Column(name="updated_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp updated_at;
+	private Timestamp updatedat;
 	
 	@Column(name="deleted_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp deleted_at;
+	private Timestamp deletedat;
 	
-	@ManyToOne
-	@JoinColumn(name="category_id")
+	@ManyToOne(targetEntity = Category.class)
+	@JoinColumn(name="category_id", referencedColumnName = "id")
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private Collection<Order_Detail> order_details;
+	private List<OrderDetail> orderdetails;
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String name, Long quantity, Long price, String image, String status, Long created_user,
-			Long updated_user, Timestamp created_at, Timestamp updated_at, Timestamp deleted_at, Category category,
-			Collection<Order_Detail> order_details) {
+	public Product(String name, Long quantity, Long price, String image, String status, Long createduser,
+			Long updateduser, Timestamp createdat, Timestamp updatedat, Timestamp deletedat, Category category) {
 		super();
 		this.name = name;
 		this.quantity = quantity;
 		this.price = price;
 		this.image = image;
 		this.status = status;
-		this.created_user = created_user;
-		this.updated_user = updated_user;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.deleted_at = deleted_at;
+		this.createduser = createduser;
+		this.updateduser = updateduser;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+		this.deletedat = deletedat;
 		this.category = category;
-		this.order_details = order_details;
 	}
 
 	public Long getId() {
@@ -129,44 +129,44 @@ public class Product {
 		this.status = status;
 	}
 
-	public Long getCreated_user() {
-		return created_user;
+	public Long getCreateduser() {
+		return createduser;
 	}
 
-	public void setCreated_user(Long created_user) {
-		this.created_user = created_user;
+	public void setCreateduser(Long createduser) {
+		this.createduser = createduser;
 	}
 
-	public Long getUpdated_user() {
-		return updated_user;
+	public Long getUpdateduser() {
+		return updateduser;
 	}
 
-	public void setUpdated_user(Long updated_user) {
-		this.updated_user = updated_user;
+	public void setUpdateduser(Long updateduser) {
+		this.updateduser = updateduser;
 	}
 
-	public Timestamp getCreated_at() {
-		return created_at;
+	public Timestamp getCreatedat() {
+		return createdat;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setCreatedat(Timestamp createdat) {
+		this.createdat = createdat;
 	}
 
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public Timestamp getUpdatedat() {
+		return updatedat;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedat(Timestamp updatedat) {
+		this.updatedat = updatedat;
 	}
 
-	public Timestamp getDeleted_at() {
-		return deleted_at;
+	public Timestamp getDeletedat() {
+		return deletedat;
 	}
 
-	public void setDeleted_at(Timestamp deleted_at) {
-		this.deleted_at = deleted_at;
+	public void setDeletedat(Timestamp deletedat) {
+		this.deletedat = deletedat;
 	}
 
 	public Category getCategory() {
@@ -177,15 +177,13 @@ public class Product {
 		this.category = category;
 	}
 
-	public Collection<Order_Detail> getOrder_details() {
-		return order_details;
+	public List<OrderDetail> getOrderdetails() {
+		return orderdetails;
 	}
 
-	public void setOrder_details(Collection<Order_Detail> order_details) {
-		this.order_details = order_details;
+	public void setOrderdetails(List<OrderDetail> orderdetails) {
+		this.orderdetails = orderdetails;
 	}
-	
-	
-	
+
 	
 }

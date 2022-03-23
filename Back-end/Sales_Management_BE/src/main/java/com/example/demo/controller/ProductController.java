@@ -16,46 +16,55 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.example.demo.model.Product;
+import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/products")
 public class ProductController {
+//	@Autowired
+//	private ProductRepository productRepository;
+//	
+//	@GetMapping("/products")
+//	public List<Product> getAllProduct(){
+//		return productRepository.findAll();
+//	}
+	
 	
 	@Autowired
-	private ProductService productService;
+	ProductService productService;
 	
 	// get all product
-	@GetMapping("/")
-	public List<Product> getAllProduct(){
-		return productService.getAllProduct();
+	@GetMapping("")
+	public List<Product> getAllProducts(){
+		return productService.getAllProducts();
 	}
 	
 	// create product rest api
-		@PostMapping("/product")
-		public Product createProdct(@RequestBody Product product) {
-			return productService.createProdct(product);
-		}
-		
-	// get product by id rest api
-	@GetMapping("/products/{id}")
-	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-		return productService.getProductById(id);
-		
+	@PostMapping("/create_product")
+	public Product createProdct(@RequestBody Product product) {
+		return productService.createProdct(product);
 	}
-	
-	// update employee rest api
-	@PutMapping("/products/{id}")
-	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails){
-		return productService.updateProduct(id, productDetails);
-	}
-	
-	// delete product rest api
-	@DeleteMapping("/products/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Long id){
-		return productService.deleteProduct(id);
-	}
+//		
+//	// get product by id rest api
+//	@GetMapping("/products/{id}")
+//	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+//		return productService.getProductById(id);
+//		
+//	}
+//	
+//	// update employee rest api
+//	@PutMapping("/products/{id}")
+//	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails){
+//		return productService.updateProduct(id, productDetails);
+//	}
+//	
+//	// delete product rest api
+//	@DeleteMapping("/products/{id}")
+//	public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Long id){
+//		return productService.deleteProduct(id);
+//	}
 		
 		
 
