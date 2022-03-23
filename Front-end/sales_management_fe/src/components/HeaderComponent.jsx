@@ -1,51 +1,61 @@
 import React, { Component } from 'react';
-import bootstrap from 'bootstrap';
+import { useNavigate,Link } from 'react-router-dom';
+import searchIcon from '../SVG/search.svg';
+import accIcon from '../SVG/acc.svg';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
-class HeaderComponent extends Component {
+function HeaderComponent(){
 
-    constructor(props){
-        super(props)
-
-        this.state = {
-            
-        }
-    }
-    
-    render() {
-        return (
+    let navigate=useNavigate;
+    const logout=()=>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("accid");
+        localStorage.removeItem("username");
+        // navigate("/");
+    };
+    return(
             <div>
-                <header className='header'>
-                    <div className='header-1'>
-                    {/* <form class="navbar-form navbar-left" action="">
-                    <div class="input-group">
-                    <input type="text" name="key"  class="form-control" placeholder="Nhập từ khóa"></input>
-                        <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
+                <header style={{width:"1920px"}}>
+                    <nav className='navbar navbar-dark bg-primary nojt'>
+                    <div style={{width:"auto"}}>
+                    <button className="navbar-brand btn btn-secondary" style={{marginLeft:"50px"}}>Home</button>
+                    <button className="navbar-brand btn btn-secondary">Posts</button>
+                    <button className="navbar-brand btn btn-secondary">Approve</button>
+                    <button className="navbar-brand btn btn-danger" style={{marginLeft:"50px"}}>Create your post</button>
+                    </div>
+                    <div class="row" style={{marginLeft:"20px"}}>
+                        <div class="col-auto">
+                            <input type="text" className="form-control" id="inputPassword2" placeholder="Search"/>
+                        </div>
+                        <div class="col-auto">
+                            <button className="btn btn-dark" ><img src={searchIcon} alt="logo"/></button>
                         </div>
                     </div>
-                    </form>		 */}
-
-                    <a href="/">  Sheeko </a>
-                    <form action="" class="search-form">
-                        <input type="search" name="" placeholder="search here..." ></input>
-                        <label for="search-box" class="fas fa-search"></label>
-                    </form>
-
-                    <div class="icons">
-                        <div id="search-btn" class="fas fa-search"></div>
-                        
-                        <div   class="fas fa-user">Đăng nhập</div>
-                        <div  class="fas fa-user">Đăng ký</div>
+                    <div style={{marginRight:"30px"}}>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="warning">
+                        <label><img src={accIcon} alt="logo"/> {localStorage.getItem("username")}</label>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                        <Dropdown.Item href="#">
+                            <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/pinfo">Personal Infomation</Link></button>
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#">
+                            <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/changePass">Change Password</Link></button>
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#">
+                            <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/">Logout</Link></button>
+                        </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                     </div>
-                    </div>
+                    </nav>
                 </header>
-                
             </div>
-        );
-    }
+        
+    );
+
 }
 
 export default HeaderComponent;

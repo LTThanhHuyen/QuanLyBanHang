@@ -51,7 +51,7 @@ public class UserController {
 		return userService.changeAccountInfo(updatedAcc, id);
 	}
 	
-	 @PreAuthorize("hasAuthority('admin') or hasAuthority('mod')")
+	@PreAuthorize("hasAuthority('admin') or hasAuthority('mod')")
     @PutMapping("/blockAcc/{id}")
     ResponseEntity<Response> block(@PathVariable long id){
         return userService.block(id);

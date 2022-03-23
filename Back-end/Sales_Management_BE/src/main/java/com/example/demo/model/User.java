@@ -24,25 +24,25 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "username", nullable = false)
+	@Column(unique = true)
 	private String username;
 	
-	@Column(name="password", nullable = false)
+	
 	private String password;
 	
 	@Column(name="is_blocked", nullable = false)
-	private Boolean isblocked;
+	private boolean isblocked;
 	
-	@Column(name="name",  length=100, columnDefinition = "nvarchar(100) not null")
+	
 	private String name;
 	
-	@Column(name="address",  length=200, columnDefinition = "nvarchar(200) not null")
+	
 	private String address;
 	
-	@Column(name = "phone", nullable = false)
+	
 	private String phone;
 	
-	@Column(name = "email", nullable = false)
+	
 	private String email;
 	
 	@Column( name="created_at", nullable = false, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

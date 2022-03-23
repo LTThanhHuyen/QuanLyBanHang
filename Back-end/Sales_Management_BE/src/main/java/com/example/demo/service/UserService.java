@@ -64,6 +64,7 @@ public class UserService {
                 Role newRole=roleRepository.findByName("user");
                 newAcc.setRole(newRole);
                 newAcc.setPassword(passwordEncoder.encode(newAcc.getPassword()));
+//                newAcc.setAddress(newAcc.getAddress());
                 newAcc.setCreatedat(timeService.getCurrentTimestamp());
                 return ResponseEntity.status(HttpStatus.OK).body(new Response("OK","Da Dang ky thanh cong",userRepository.save(newAcc)));
             } 
