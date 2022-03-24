@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.Role;
-import com.example.demo.service.RoleService;
+import com.example.demo.model.Category;
+import com.example.demo.service.CategoryService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(path = "/roles")
-public class RoleController {
-//	@Autowired
-//	RoleService roleService;
-//	@GetMapping("")
-//	public List<Role> getAllRoles(){
-//		return roleService.getAllRoles();
-//	}
-
+@RequestMapping("/categories")
+public class CategoryController {
+	@Autowired
+	CategoryService categoryService;
+	
+	// get all category
+	@GetMapping("")
+	public List<Category> getAllProducts(){
+		return categoryService.getAllCategory();
+	}
 }

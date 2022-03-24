@@ -64,8 +64,11 @@ public class UserService {
                 Role newRole=roleRepository.findByName("user");
                 newAcc.setRole(newRole);
                 newAcc.setPassword(passwordEncoder.encode(newAcc.getPassword()));
+//                newAcc.setName(newAcc.getName());
 //                newAcc.setAddress(newAcc.getAddress());
+//                newAcc.setPhone(newAcc.getPhone());
                 newAcc.setCreatedat(timeService.getCurrentTimestamp());
+                newAcc.setIsblocked(false);
                 return ResponseEntity.status(HttpStatus.OK).body(new Response("OK","Da Dang ky thanh cong",userRepository.save(newAcc)));
             } 
         }

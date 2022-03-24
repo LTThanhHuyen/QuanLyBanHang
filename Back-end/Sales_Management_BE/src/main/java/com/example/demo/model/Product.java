@@ -57,8 +57,8 @@ public class Product {
 	@JoinColumn(name="category_id", referencedColumnName = "id")
 	private Category category;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<OrderDetail> orderdetails;
+//	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//	private List<OrderDetail> orderdetails;
 
 	public Product() {
 		super();
@@ -177,13 +177,13 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<OrderDetail> getOrderdetails() {
-		return orderdetails;
-	}
-
-	public void setOrderdetails(List<OrderDetail> orderdetails) {
-		this.orderdetails = orderdetails;
-	}
+//	public List<OrderDetail> getOrderdetails() {
+//		return orderdetails;
+//	}
+//
+//	public void setOrderdetails(List<OrderDetail> orderdetails) {
+//		this.orderdetails = orderdetails;
+//	}
 
 	
 }

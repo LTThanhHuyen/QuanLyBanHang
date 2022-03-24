@@ -41,8 +41,8 @@ public class Order {
 	@Column(name="deleted_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp deletedat;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDetail> orderdetails;
+//	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+//	private List<OrderDetail> orderdetails;
 	
 	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name="user_id", referencedColumnName = "id")
@@ -121,13 +121,13 @@ public class Order {
 		this.deletedat = deletedat;
 	}
 
-	public List<OrderDetail> getOrderdetails() {
-		return orderdetails;
-	}
-
-	public void setOrderdetails(List<OrderDetail> orderdetails) {
-		this.orderdetails = orderdetails;
-	}
+//	public List<OrderDetail> getOrderdetails() {
+//		return orderdetails;
+//	}
+//
+//	public void setOrderdetails(List<OrderDetail> orderdetails) {
+//		this.orderdetails = orderdetails;
+//	}
 
 	public User getUser() {
 		return user;

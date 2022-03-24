@@ -30,7 +30,7 @@ public class User {
 	
 	private String password;
 	
-	@Column(name="is_blocked", nullable = false)
+	@Column(name="is_blocked",columnDefinition = "bit(1) default 0" )
 	private boolean isblocked;
 	
 	

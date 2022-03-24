@@ -39,8 +39,8 @@ public class Category {
 	@Column(name="deleted_at", nullable = true, updatable = false, columnDefinition =  "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp deletedat;
 	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	private List<Product> products;
+//	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+//	private List<Product> products;
 
 	public Category() {
 		super();
@@ -115,14 +115,6 @@ public class Category {
 		this.deletedat = deletedat;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	
-	
 
 }

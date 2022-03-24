@@ -22,8 +22,8 @@ public class Role {
 	@Column(name="name",  length=200, columnDefinition = "nvarchar(200) not null")
 	private String name;
 	
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-	private List<User> users;
+//	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+//	private List<User> users;
 
 	public Role() {
 		super();

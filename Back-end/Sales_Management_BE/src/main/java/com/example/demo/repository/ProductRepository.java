@@ -10,7 +10,8 @@ import com.example.demo.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
-	 List<Product> findByCategory(Category category);
+//	 List<Product> findByCategory(Category category);
 	 List<Product> findByName(String name);
+	 long countByCategory(long category_id);
 
 }

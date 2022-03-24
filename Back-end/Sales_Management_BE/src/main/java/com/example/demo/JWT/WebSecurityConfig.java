@@ -75,6 +75,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/register").permitAll() //cho phep tat ca truy cap path register va login
                 .antMatchers("/login").permitAll()
+                .antMatchers("/products/**").permitAll()
+                .antMatchers("/categories/**").permitAll()
                 //nhung path con lai (anyrequest) bat buoc xac thuc
                 .anyRequest().authenticated().and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutsuccess").permitAll()
                 .and().exceptionHandling().authenticationEntryPoint(authenticationEntryPointJwt);//neu co error 

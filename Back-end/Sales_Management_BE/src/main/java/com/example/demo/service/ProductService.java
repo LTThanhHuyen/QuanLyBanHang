@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Product;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -28,11 +29,21 @@ public class ProductService {
 	@Autowired
 	TimeService timeService;
 	@Autowired
+	CategoryRepository categoryRepository;
+	@Autowired
 	UserRepository userRepository;
 	
 	public List<Product> getAllProducts(){
 		return productRepository.findAll();
 	}
+	
+	public long countProduct(long category_id){
+        return productRepository.countByCategory(category_id);
+    }
+	
+//	public List<Product> getAllProductByCategory(){
+//		return productRepository.findByCategory(ca);
+//	}
 	
 //	
 	public Product createProdct(@RequestBody Product product) {

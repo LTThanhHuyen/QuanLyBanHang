@@ -23,14 +23,7 @@ import com.example.demo.service.ProductService;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-//	@Autowired
-//	private ProductRepository productRepository;
-//	
-//	@GetMapping("/products")
-//	public List<Product> getAllProduct(){
-//		return productRepository.findAll();
-//	}
-	
+
 	
 	@Autowired
 	ProductService productService;
