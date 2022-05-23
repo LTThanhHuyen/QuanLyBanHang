@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +30,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@GetMapping("/checkToken")
+    ResponseEntity<?> checkToken() {
+        return ResponseEntity.status(HttpStatus.OK).body(new Response("200", "successful", ""));
+    }
+	
 	@PreAuthorize("hasAuthority('admin')")
     @GetMapping("/getAllRole")
     List<Role> getRole(){
@@ -43,6 +49,12 @@ public class UserController {
 	@PostMapping("/register")
     ResponseEntity<Response> registerAccount(@RequestBody User newAcc){
         return userService.registerAccount(newAcc);
+    }
+	
+	@PreAuthorize("#userId == authentication.principal.id")
+    @GetMapping("/getUserInfo/{userId}")
+    ResponseEntity<?> getUser(@PathVariable long userId) {
+        return userService.getUser(userId);
     }
 	
 	//Thay đổi thông tin

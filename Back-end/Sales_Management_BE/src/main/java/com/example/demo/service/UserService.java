@@ -74,6 +74,11 @@ public class UserService {
         }
 	}
 	
+	
+	 public ResponseEntity<?> getUser(long userId) {
+	        return ResponseEntity.status(HttpStatus.OK).body(new Response("OK", "OK", userRepository.findById(userId)));
+	    }
+	
 	//Thay đổi thông tin
 	public ResponseEntity<Response> changeAccountInfo(User updatedAcc,long id){
         userRepository.findById(id).map(acc ->{

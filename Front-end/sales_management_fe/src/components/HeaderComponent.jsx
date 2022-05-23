@@ -1,57 +1,56 @@
 import React, { Component } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate,Link, useHistory } from 'react-router-dom';
 import {Navbar, Nav, Container, NavDropdown, FormControl, Form, Button} from 'react-bootstrap';
+import searchIcon from '../SVG/search.svg';
+import accIcon from '../SVG/acc.svg';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Modal from 'react-bootstrap/Modal';
+// import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
 
-
-function HeaderComponent(){
-
-    let navigate=useNavigate;
+function HeaderComponent(props){
+    
+    // let navigate=useNavigate;
+    let history= useHistory
     const logout=()=>{
         localStorage.removeItem("token");
         localStorage.removeItem("accid");
         localStorage.removeItem("username");
         // navigate("/");
     };
-    return(
-            // <div>
-            //     <header style={{width:"1920px"}}>
-            //         <nav className='navbar navbar-dark bg-primary nojt'>
-            //         <div style={{width:"auto"}}>
-            //         <button className="navbar-brand btn btn-secondary" style={{marginLeft:"50px"}}>Home</button>
-            //         <button className="navbar-brand btn btn-secondary">Posts</button>
-            //         <button className="navbar-brand btn btn-secondary">Approve</button>
-            //         <button className="navbar-brand btn btn-danger" style={{marginLeft:"50px"}}>Create your post</button>
-            //         </div>
-            //         <div class="row" style={{marginLeft:"20px"}}>
-            //             <div class="col-auto">
-            //                 <input type="text" className="form-control" id="inputPassword2" placeholder="Search"/>
-            //             </div>
-            //             <div class="col-auto">
-            //                 <button className="btn btn-dark" ><img src={searchIcon} alt="logo"/></button>
-            //             </div>
-            //         </div>
-            //         <div style={{marginRight:"30px"}}>
-            //         <Dropdown>
-            //             <Dropdown.Toggle variant="warning">
-            //             <label><img src={accIcon} alt="logo"/> {localStorage.getItem("username")}</label>
-            //             </Dropdown.Toggle>
-            //             <Dropdown.Menu>
-            //             <Dropdown.Item href="#">
-            //                 <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/pinfo">Personal Infomation</Link></button>
-            //             </Dropdown.Item>
-            //             <Dropdown.Item href="#">
-            //                 <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/changePass">Change Password</Link></button>
-            //             </Dropdown.Item>
-            //             <Dropdown.Item href="#">
-            //                 <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/">Logout</Link></button>
-            //             </Dropdown.Item>
-            //             </Dropdown.Menu>
-            //         </Dropdown>
-            //         </div>
-            //         </nav>
-            //     </header>
-            // </div>
 
+    // const [loading, setLoading] = useState(false);
+    // const [key, setKey] = useState("");
+
+    // const changeKeyWord = (e) => {
+    //     setKey(e.target.value)
+    // }
+
+    const getLogin=()=>{
+        // setLoading(true);
+        if(localStorage.getItem("username") === null){
+            return <Nav.Link as={Link} to= "login">Đăng nhập</Nav.Link>
+        }else{
+            return <Dropdown>
+                    <Dropdown.Toggle variant="warning">
+                    <label><img src={accIcon} alt="logo"/> {localStorage.getItem("username")}</label>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                    <Dropdown.Item href="#">
+                        <button onClick={() => props.history.push('/changeinfo')} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/changeinfo">Thông tin cá nhân</Link></button>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#">
+                        <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/changePass">Lịch sử đặt hàng</Link></button>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#">
+                        <button onClick={logout} style={{border:"none",background:"none"}}><Link style={{"text-decoration":"none"}} to="/">Đăng xuất</Link></button>
+                    </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+        }
+    }
+    return(
            
         <div>
             <header>
@@ -65,19 +64,18 @@ function HeaderComponent(){
                             <Nav.Link as={Link} to= "#">Balo- Túi</Nav.Link>
                             <Nav.Link as={Link} to= "#">Phụ kiện</Nav.Link>
                             <Form className="d-flex" style={{marginLeft: "100px"}}>
-                                <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
+                                {/* <FormControl type="search" placeholder="Search" className="me-2"              aria-label="Search"
                                 />
-                                <Button variant="outline-success">Search</Button>
+                                <Button variant="outline-success">Search</Button> */}
+                                {/* <input type="text" value={key} className="form-control" onChange={changeKeyWord} id="inputPassword2" placeholder="Search Post" />
+                                <button className="btn btn-dark" onClick={() => props.history.push(`/home/key=${key}`)} ><img src={searchIcon} alt="logo" /></button> */}
                             </Form>
                         </Nav>
                         <Nav className ='narbar-right'>
                             <Nav.Link >Giỏ hàng</Nav.Link>
                             
-                            <Nav.Link as={Link} to= "/login">Login</Nav.Link>
+                            {getLogin()}
+                            
                             
                         </Nav>
                         </Container>

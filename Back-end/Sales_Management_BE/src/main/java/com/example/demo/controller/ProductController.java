@@ -21,7 +21,7 @@ import com.example.demo.service.ProductService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/products")
+@RequestMapping(path = "/")
 public class ProductController {
 
 	
@@ -29,7 +29,7 @@ public class ProductController {
 	ProductService productService;
 	
 	// get all product
-	@GetMapping("")
+	@GetMapping("products")
 	public List<Product> getAllProducts(){
 		return productService.getAllProducts();
 	}
@@ -39,13 +39,13 @@ public class ProductController {
 	public Product createProdct(@RequestBody Product product) {
 		return productService.createProdct(product);
 	}
-//		
-//	// get product by id rest api
-//	@GetMapping("/products/{id}")
-//	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-//		return productService.getProductById(id);
-//		
-//	}
+		
+	// get product by id rest api
+	@GetMapping("/products/{id}")
+	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+		return productService.getProductById(id);
+		
+	}
 //	
 //	// update employee rest api
 //	@PutMapping("/products/{id}")

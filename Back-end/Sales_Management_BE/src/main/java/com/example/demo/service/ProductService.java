@@ -46,21 +46,21 @@ public class ProductService {
 //	}
 	
 //	
-	public Product createProdct(@RequestBody Product product) {
+	public Product createProdct(Product product) {
 		return productRepository.save(product);
 	}
 	
 	
 	// get product by id rest api
-	public ResponseEntity<Product> getProductById(@PathVariable Long id){
-		Product employee = productRepository.findById(id)
+	public ResponseEntity<Product> getProductById( Long id){
+		Product product = productRepository.findById(id)
 				.orElseThrow(()-> new ResourceNotFoundException("Employee not exits with id: " + id));
-		return ResponseEntity.ok(employee);	
+		return ResponseEntity.ok(product);	
 	}
 	
 	// update product rest api
 		
-	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails){
+	public ResponseEntity<Product> updateProduct( Long id, Product productDetails){
 		java.util.Date jDate= new java.util.Date();
 		long currentTime=jDate.getTime();
 		

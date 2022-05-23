@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHistory } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
 import ProductService from "../services/ProductService";
 import { useEffect } from 'react';
+import HeaderComponent from "./HeaderComponent";
 
 // import Card from 'react-bootstrap/Card';
 // import Modal from 'react-bootstrap/Modal';
@@ -11,19 +12,23 @@ import { useEffect } from 'react';
 // import Dropdown from 'react-bootstrap/Dropdown';
 
 
-function HomeComponent() {
-    let navigate=useNavigate();
+function HomeComponent(props) {
+    
+
+    // let navigate=useNavigate();
+    let history = useHistory;
     const[result1,setResult1]=useState([]);
     const[result2,setResult2]=useState([]);
 
-    // useEffect(()=>{
-    //     CategoryService.getCategories().then(res=>{
-    //         if(res.data!==null){
-    //             setResult1(res.data);}
-    //     });
-    // },[result1]);
+    // const viewProductDetail=(id)=>{navigate(`/view-product/${id}`)};
+
+    const viewProductDetail=(id) => {
+        props.history.push(`/view-product/${id}`);
+        // console.log(props);
+    }
 
     useEffect(()=>{
+        
         ProductService.getProducts().then(res=>{
             if(res.data!==null){
                 setResult1(res.data);}
@@ -31,38 +36,50 @@ function HomeComponent() {
         CategoryService.getCategories().then(res=>{
             if(res.data!==null){
                 setResult2(res.data);}
-            // } else {
-            //     setResult("No topic is created")
-            // }
+           
         });
-        // if(localStorage.getItem("role")!=="user")
-        //     setCanAddTopic(true);
+       
     },[result1,result2]);
     return(
-        <div style={{marginLeft: "2%", marginRight:"2%"}}>
+        
+        <div >
+            {/* <HeaderComponent/> */}
             <br></br>
-            <table style={{border:"none"}}>
+            <table style={{border:"none", marginLeft: "2%", marginRight: "2%"}}>
                 <td style={{width:"1100px"}}>
-                     <table>
+                     {/* <table>
                 
                          {
                             result1.map(
                                 product=>
                                 <tr key={product.id}>
-                                    <td>
-                                        
-                                            <img src={product.image} style={{height: "300px"}} alt="image" /><br></br> 
-                                            <b>{product.name}</b><br></br>
-                                            {product.price} VNĐ<br></br> 
+                                    <td>                                       
+                                        <img src={product.image} style={{height: "300px"}} alt="image" onClick={()=>viewProductDetail(product.id)} /><br></br> 
+                                        <b>{product.name}</b><br></br>
+                                        {product.price} VNĐ<br></br> 
                                                                      
                                     </td>
                                 </tr>
                             )
                             }
                         
-                     </table>
+                     </table> */}
 
-                   
+
+                    <div class="row">
+                        
+                        {     
+                            result1.map(
+                                product=>   
+                                <div key={product.id} className="col-sm-4" style={{textAlign: "center", height: "360px"}}>   
+                                    <img src={product.image} style={{height: "300px"}} alt="image" onClick={()=>viewProductDetail(product.id)}/><br></br> 
+                                    <b>{product.name}</b><br></br>
+                                    {product.price} VNĐ<br></br> 
+                                </div>
+                            )
+                        } 
+                        
+                    </div>                                   
                 </td>
                 <td style={{width:"250px", verticalAlign:"top"}}>
                     <table className = "table table-striped table-bordered">
